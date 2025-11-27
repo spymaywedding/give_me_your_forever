@@ -39,4 +39,29 @@ window.addEventListener("load", () => {
 
   window.addEventListener("pointerdown", resumeOnGesture, { once: true });
   window.addEventListener("touchstart", resumeOnGesture, { once: true });
+
+  // Countdown to 21 Nov 2026 (00:00 local time)
+  const countdown = document.getElementById("hero-countdown");
+  if (countdown) {
+    const target = new Date("2026-11-21T00:00:00");
+    const setValue = (unit, value) => {
+      const el = countdown.querySelector(`[data-unit="${unit}"]`);
+      if (el) el.textContent = value.toString().padStart(2, "0");
+    };
+    const tick = () => {
+      const now = new Date();
+      let diff = target - now;
+      if (diff < 0) diff = 0;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      setValue("days", days);
+      setValue("hours", hours);
+      setValue("minutes", minutes);
+      setValue("seconds", seconds);
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
 });
