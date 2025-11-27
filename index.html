@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
+      --mock: url('./mock.jpg');
       --cream: #fffaf4;
       --text-dark: #141414;
       --accent: #7a2f00;
@@ -44,7 +45,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(160deg, rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1529158062015-cad636e20581?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      background: linear-gradient(160deg, rgba(0,0,0,0.65), rgba(0,0,0,0.35)), var(--mock) center/cover no-repeat;
       filter: saturate(1.05);
       transform: scale(1.02);
     }
@@ -154,13 +155,18 @@
     }
     .timeline-item {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto auto 1fr;
       gap: 12px;
       align-items: center;
       padding: 12px 14px;
       border-radius: 14px;
       background: rgba(122,47,0,0.06);
       border: 1px solid rgba(122,47,0,0.1);
+    }
+    .timeline-item .icon {
+      background: #fff;
+      border-radius: 8px;
+      padding: 4px;
     }
     .time {
       font-weight: 700;
@@ -177,6 +183,98 @@
     }
     .maroon .section-title { color: var(--cream); }
     .maroon .section-sub { color: rgba(255,250,244,0.85); }
+    .location-card {
+      background: rgba(0,0,0,0.08);
+      border-radius: var(--radius);
+      border: 2px solid rgba(255,255,255,0.15);
+      padding: clamp(18px, 3vw, 24px);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(18px, 3vw, 28px);
+      align-items: start;
+    }
+    .loc-left {
+      text-align: center;
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+    }
+    .loc-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 4vw, 30px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .loc-qr {
+      width: 150px;
+      height: 150px;
+      background: #fff;
+      border-radius: 6px;
+      padding: 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .loc-qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .loc-text {
+      color: var(--cream);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+    }
+    .schedule {
+      display: grid;
+      gap: 16px;
+      color: var(--cream);
+    }
+    .schedule h4 {
+      margin: 0 0 6px;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .schedule-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding-left: 4px;
+    }
+    .schedule-item:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 42px;
+      bottom: -6px;
+      width: 2px;
+      background: rgba(255,250,244,0.4);
+      opacity: 0.8;
+    }
+    .schedule-icon {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+    }
+    .schedule-body {
+      display: grid;
+      gap: 4px;
+    }
+    .schedule-title {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .schedule-time {
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
     .pill {
       display: inline-flex;
       align-items: center;
@@ -271,6 +369,13 @@
       color: var(--muted);
       font-size: 14px;
     }
+    .icon {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+      object-fit: contain;
+      display: inline-block;
+    }
     @media (max-width: 720px) {
       header.hero { min-height: 520px; }
       .timeline-item { grid-template-columns: 1fr; }
@@ -307,7 +412,7 @@
     <section id="countdown">
       <div class="section-inner grid-two">
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1529636474099-89b1f33d2c6b?auto=format&fit=crop&w=900&q=80" alt="Wedding rings" style="width:100%; height:100%; object-fit: cover;">
+          <img src="./mock.jpg" alt="Wedding rings" style="width:100%; height:100%; object-fit: cover;">
         </div>
         <div>
           <p class="section-sub">Countdown</p>
@@ -328,18 +433,22 @@
         </p>
         <div class="timeline">
           <div class="timeline-item">
+            <img class="icon" src="./ring_icon.png" alt="">
             <div class="time">09:09</div>
             <div class="desc">ขบวนขันหมาก & Engagement Ceremony</div>
           </div>
           <div class="timeline-item">
+            <img class="icon" src="./ring_icon.png" alt="">
             <div class="time">10:29</div>
             <div class="desc">Water Blessing Ceremony</div>
           </div>
           <div class="timeline-item">
+            <img class="icon" src="./ring_icon.png" alt="">
             <div class="time">11:09</div>
             <div class="desc">Finished Morning Ceremony</div>
           </div>
           <div class="timeline-item">
+            <img class="icon" src="./ring_icon.png" alt="">
             <div class="time">11:30</div>
             <div class="desc">Wedding Reception</div>
           </div>
@@ -348,19 +457,49 @@
     </section>
 
     <section class="maroon" id="location">
-      <div class="section-inner grid-two">
-        <div>
-          <p class="section-sub">สถานที่</p>
-          <h3 class="section-title">ริมธารา พระราม 3 (ห้องริมนที)</h3>
-          <div class="pill">Saturday, 21 Nov 2026</div>
-          <div class="pill">Dress code: Cream / Brown / Red (Burgundy)</div>
-          <p style="margin-top:16px;">คลิกแผนที่เพื่อเปิด Google Maps</p>
-          <div class="cta-row" style="justify-content:flex-start;">
-            <a class="btn" href="https://maps.app.goo.gl/1NCrnEcLxnFLv1Bs9?g_st=ipc" target="_blank" rel="noopener">เปิดแผนที่</a>
+      <div class="section-inner">
+        <div class="location-card">
+          <div class="loc-left">
+            <p class="loc-heading">Location</p>
+            <div class="loc-qr">
+              <img src="./map.png" alt="Map QR">
+            </div>
+            <div class="loc-text">
+              <div>ริมธารา พระราม3 (ห้องริมนที)</div>
+              <div>Saturday,21 Nov 2026</div>
+            </div>
           </div>
-        </div>
-        <div class="image-card">
-          <img src="./rimtara.png" alt="Rimtara Rama 3 location">
+          <div class="schedule">
+            <h4>Wedding Schedule</h4>
+            <div class="schedule-item">
+              <img class="schedule-icon" src="./ring_icon.png" alt="">
+              <div class="schedule-body">
+                <div class="schedule-title">Khan Mak , Engagement Ceremony</div>
+                <div class="schedule-time">09.09</div>
+              </div>
+            </div>
+            <div class="schedule-item">
+              <img class="schedule-icon" src="./ring_icon.png" alt="">
+              <div class="schedule-body">
+                <div class="schedule-title">Water Blessing Ceremony</div>
+                <div class="schedule-time">10.29</div>
+              </div>
+            </div>
+            <div class="schedule-item">
+              <img class="schedule-icon" src="./ring_icon.png" alt="">
+              <div class="schedule-body">
+                <div class="schedule-title">Finished Morning Ceremony</div>
+                <div class="schedule-time">11.09</div>
+              </div>
+            </div>
+            <div class="schedule-item">
+              <img class="schedule-icon" src="./ring_icon.png" alt="">
+              <div class="schedule-body">
+                <div class="schedule-title">Wedding Reception</div>
+                <div class="schedule-time">11.30</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -376,10 +515,10 @@
           </div>
         </div>
         <div class="gallery">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Couple">
-          <img src="https://images.unsplash.com/photo-1520854221050-0f4caff449fb?auto=format&fit=crop&w=900&q=80" alt="Rings">
-          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Bride">
-          <img src="https://images.unsplash.com/photo-1520854221050-0f4caff449fb?auto=format&fit=crop&w=900&q=80" alt="Details">
+          <img src="./mock.jpg" alt="Couple">
+          <img src="./mock.jpg" alt="Rings">
+          <img src="./mock.jpg" alt="Bride">
+          <img src="./mock.jpg" alt="Details">
         </div>
       </div>
     </section>
@@ -394,12 +533,12 @@
         <div class="gift-card">
           <div class="gift-row">
             <div class="gift-qr">
-              <img src="./donate.jpeg" alt="Gift QR">
+              <img src="./mock.jpg" alt="Gift QR">
             </div>
             <div class="gift-text">
-              <span class="arrow">••••</span>
+              <img class="icon" src="./ring_icon.png" alt="">
               <span>Send online gift to us</span>
-              <span>🎁</span>
+              <img class="icon" src="./ring_icon.png" alt="">
             </div>
           </div>
         </div>
@@ -411,12 +550,12 @@
         <p class="section-sub">Gallery</p>
         <h3 class="section-title">Moments</h3>
         <div class="gallery">
-          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Bride">
-          <img src="https://images.unsplash.com/photo-1520854221050-0f4caff449fb?auto=format&fit=crop&w=800&q=80" alt="Ring">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Couple">
-          <img src="https://images.unsplash.com/photo-1511288593014-8acb33db1c83?auto=format&fit=crop&w=800&q=80" alt="Preparation">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Details">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Bouquet">
+          <img src="./mock.jpg" alt="Bride">
+          <img src="./mock.jpg" alt="Ring">
+          <img src="./mock.jpg" alt="Couple">
+          <img src="./mock.jpg" alt="Preparation">
+          <img src="./mock.jpg" alt="Details">
+          <img src="./mock.jpg" alt="Bouquet">
         </div>
       </div>
     </section>
