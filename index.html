@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>May & Spy Wedding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #fffaf4;
+      --text-dark: #141414;
+      --accent: #7a2f00;
+      --accent-strong: #670c0d;
+      --muted: #48321f;
+      --shadow: 0 15px 40px rgba(0,0,0,0.12);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: clamp(18px, 3vw, 32px);
+    }
+    header.hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      min-height: clamp(520px, 70vh, 760px);
+      display: grid;
+      place-items: center;
+      color: var(--cream);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    header.hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1529158062015-cad636e20581?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      filter: saturate(1.05);
+      transform: scale(1.02);
+    }
+    .hero-content {
+      position: relative;
+      padding: clamp(24px, 4vw, 48px);
+    }
+    .eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: clamp(12px, 1vw, 14px);
+      color: rgba(255,250,244,0.8);
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 10vw, 86px);
+      letter-spacing: 0.04em;
+      margin: 10px 0 6px;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 4vw, 32px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 24px;
+      color: var(--cream);
+    }
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .btn {
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.12);
+      color: var(--cream);
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+      transition: transform 150ms ease, box-shadow 200ms ease, background 200ms ease;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.18);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.16);
+    }
+    section {
+      margin-top: clamp(32px, 5vw, 52px);
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .section-inner {
+      padding: clamp(22px, 4vw, 38px);
+    }
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(16px, 3vw, 24px);
+      align-items: center;
+    }
+    .card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      background: #fff;
+    }
+    .media {
+      position: relative;
+      padding-top: 56.25%;
+      background: #000;
+    }
+    .media iframe, .media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      object-fit: cover;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 40px);
+      color: var(--accent);
+      margin: 0 0 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .section-sub {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(122,47,0,0.06);
+      border: 1px solid rgba(122,47,0,0.1);
+    }
+    .time {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+    .desc {
+      color: #2a2a2a;
+      font-weight: 600;
+    }
+    .maroon {
+      background: linear-gradient(120deg, var(--accent-strong), #5e0b0c);
+      color: var(--cream);
+    }
+    .maroon .section-title { color: var(--cream); }
+    .maroon .section-sub { color: rgba(255,250,244,0.85); }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: var(--cream);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-top: 8px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .gallery img {
+      width: 100%;
+      display: block;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .footer {
+      text-align: center;
+      padding: 28px 16px 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    @media (max-width: 720px) {
+      header.hero { min-height: 520px; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .media { padding-top: 65%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Background music -->
+    <audio id="bgm" src="./give_me_you_forever.mp3" preload="auto" autoplay loop playsinline></audio>
+
+    <header class="hero" id="top">
+      <div class="hero-content">
+        <div class="eyebrow">Save the date · Nov 21, 2026</div>
+        <h1>May &amp; Spy</h1>
+        <h2>Wedding</h2>
+        <p>กดปุ่มเพื่อฟังเพลงและเลื่อนชมการ์ดของเรา</p>
+        <div class="cta-row">
+          <a class="btn" href="#video">ฟังเพลง</a>
+          <a class="btn" href="#invite">ชมการ์ด</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="video">
+      <div class="section-inner grid-two">
+        <div>
+          <p class="section-sub">Love Song</p>
+          <h3 class="section-title">Give Me Your Forever</h3>
+          <p>Zack Tabudlo - Lyric Video</p>
+          <p>กดเล่นเพลงนี้ไว้ แล้วเลื่อนชมการ์ดแต่งงานของเราได้เลย</p>
+        </div>
+        <div class="card">
+          <div class="media">
+            <iframe src="https://www.youtube-nocookie.com/embed/5HZ9qeFjhYk" title="Give Me Your Forever" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="countdown">
+      <div class="section-inner grid-two">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1529636474099-89b1f33d2c6b?auto=format&fit=crop&w=900&q=80" alt="Wedding rings" style="width:100%; height:100%; object-fit: cover;">
+        </div>
+        <div>
+          <p class="section-sub">Countdown</p>
+          <h3 class="section-title">See you on the big day</h3>
+          <div class="card media" style="padding-top: 70%;">
+            <iframe src="https://canva-embed.com/api/iframe?url=https%3A%2F%2Fwww.tickcounter.com%2Fcountdown%2F8707784%2Flets-countdown&key=462812a26b593f2dbfbfcbb14f6d699a" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="invite">
+      <div class="section-inner">
+        <p class="section-sub">We joyfully invite you</p>
+        <h3 class="section-title">Ms. Kamonwan (May) &amp; Mr. Thanatthuch (Spy)</h3>
+        <p style="text-align:center; max-width:720px; margin: 0 auto 18px;">
+          With great joy, we invite you to honor us with your presence and join us for a celebratory meal of our wedding.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="time">09:09</div>
+            <div class="desc">ขบวนขันหมาก & Engagement Ceremony</div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">10:29</div>
+            <div class="desc">Water Blessing Ceremony</div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">11:09</div>
+            <div class="desc">Finished Morning Ceremony</div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">11:30</div>
+            <div class="desc">Wedding Reception</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="maroon" id="location">
+      <div class="section-inner grid-two">
+        <div>
+          <p class="section-sub">สถานที่</p>
+          <h3 class="section-title">ริมธารา พระราม 3 (ห้องริมนที)</h3>
+          <div class="pill">Saturday, 21 Nov 2026</div>
+          <div class="pill">Dress code: Cream / Brown / Red (Burgundy)</div>
+          <p style="margin-top:16px;">คลิกแผนที่เพื่อเปิด Google Maps</p>
+          <div class="cta-row" style="justify-content:flex-start;">
+            <a class="btn" href="https://maps.app.goo.gl/1NCrnEcLxnFLv1Bs9?g_st=ipc" target="_blank" rel="noopener">เปิดแผนที่</a>
+          </div>
+        </div>
+        <div class="card media" style="padding-top:65%;">
+          <iframe title="Location Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.698206255329!2d100.5362036!3d13.6798646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2a15a3475f857%3A0x88c124a3edee40f2!2z4Lij4Li04Lip4Lix4LiVIOC4q-C4oeC4qOC4leC4reC4meC4meC4l-C5gOC4mSBDYW5scml2ZXIgQ2x1YiAtIEtob24gS2FlbyBDbHVi!5e0!3m2!1sen!2sth!4v1700000000000!5m2!1sen!2sth" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="rsvp">
+      <div class="section-inner grid-two">
+        <div>
+          <p class="section-sub">RSVP</p>
+          <h3 class="section-title">Register Here!</h3>
+          <p>เพื่อให้เราเตรียมงานได้ครบถ้วน รบกวนตอบแบบฟอร์มยืนยันการเข้าร่วม</p>
+          <div class="cta-row" style="justify-content:flex-start;">
+            <a class="btn" href="https://forms.gle/NsVRhyTcu2yGShRw7" target="_blank" rel="noopener">กดที่นี่</a>
+          </div>
+        </div>
+        <div class="gallery">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Couple">
+          <img src="https://images.unsplash.com/photo-1520854221050-0f4caff449fb?auto=format&fit=crop&w=900&q=80" alt="Rings">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Bride">
+          <img src="https://images.unsplash.com/photo-1520854221050-0f4caff449fb?auto=format&fit=crop&w=900&q=80" alt="Details">
+        </div>
+      </div>
+    </section>
+
+    <section class="maroon" id="gift">
+      <div class="section-inner grid-two">
+        <div>
+          <p class="section-sub">ของขวัญ</p>
+          <h3 class="section-title">Send online gift to us</h3>
+          <p>หากไม่สะดวกมาร่วมงาน สามารถส่งความรักและของขวัญออนไลน์ถึงเราได้</p>
+        </div>
+        <div class="card media" style="padding-top:50%; background:#fff;">
+          <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1000&q=80" alt="Gift box">
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="section-inner">
+        <p class="section-sub">Gallery</p>
+        <h3 class="section-title">Moments</h3>
+        <div class="gallery">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Bride">
+          <img src="https://images.unsplash.com/photo-1520854221050-0f4caff449fb?auto=format&fit=crop&w=800&q=80" alt="Ring">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Couple">
+          <img src="https://images.unsplash.com/photo-1511288593014-8acb33db1c83?auto=format&fit=crop&w=800&q=80" alt="Preparation">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Details">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="Bouquet">
+        </div>
+      </div>
+    </section>
+
+    <section class="maroon" id="social">
+      <div class="section-inner">
+        <p class="section-sub">See you</p>
+        <h3 class="section-title">#MaySpyWedding</h3>
+        <p style="text-align:center; margin: 10px 0 18px;">Our apologies if we are unable to greet you in person</p>
+        <div class="cta-row">
+          <a class="btn" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">Made with love for May &amp; Spy · 21 Nov 2026</div>
+  </div>
+
+  <script src="./main.js"></script>
+</body>
+</html>
