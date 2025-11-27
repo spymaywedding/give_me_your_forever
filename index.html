@@ -288,11 +288,11 @@
     }
     .invite-heading {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(18px, 2.4vw, 24px);
-      font-weight: 600;
+      font-size: clamp(22px, 3vw, 26px);
+      font-weight: 700;
       color: #2c1d10;
       margin: 0;
-      white-space: nowrap;
+      white-space: normal;
     }
     .invite-subtext {
       font-family: 'Playfair Display', serif;
@@ -304,19 +304,20 @@
     }
     .invite-couple {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(18px, 3vw, 24px);
-      font-weight: 600;
+      font-size: clamp(22px, 3.6vw, 30px);
+      font-weight: 700;
       color: #8a3b05;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      flex-wrap: nowrap;
+      gap: 12px;
+      flex-wrap: wrap;
       margin: 0 auto;
+      text-align: center;
     }
     .invite-couple img {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       object-fit: contain;
     }
     .invite-footer {
@@ -334,18 +335,17 @@
     }
     @media (max-width: 640px) {
       .invite-heading {
-        font-size: 16px;
-        letter-spacing: 0.06em;
+        font-size: 18px;
+        letter-spacing: 0.08em;
         white-space: normal;
       }
       .invite-couple {
-        font-size: 16px;
-        gap: 6px;
+        font-size: 18px;
+        gap: 8px;
       }
-      .invite-couple span { white-space: nowrap; }
       .invite-couple img {
-        width: 26px;
-        height: 26px;
+        width: 30px;
+        height: 30px;
       }
     }
     .time {
