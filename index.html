@@ -201,6 +201,70 @@
       object-fit: cover;
       border-radius: 12px;
     }
+    .image-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      min-height: 240px;
+    }
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .gift-card {
+      background: #fffaf4;
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+    .gift-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: center;
+      width: 100%;
+    }
+    .gift-qr {
+      width: 140px;
+      height: 140px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+    .gift-qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .gift-text {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .gift-text .arrow {
+      color: var(--accent);
+      font-weight: 700;
+    }
     .footer {
       text-align: center;
       padding: 28px 16px 10px;
@@ -233,18 +297,10 @@
     </header>
 
     <section id="video">
-      <div class="section-inner grid-two">
-        <div>
-          <p class="section-sub">Love Song</p>
-          <h3 class="section-title">Give Me Your Forever</h3>
-          <p>Zack Tabudlo - Lyric Video</p>
-          <p>กดเล่นเพลงนี้ไว้ แล้วเลื่อนชมการ์ดแต่งงานของเราได้เลย</p>
-        </div>
-        <div class="card">
-          <div class="media">
-            <iframe src="https://www.youtube-nocookie.com/embed/5HZ9qeFjhYk" title="Give Me Your Forever" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-        </div>
+      <div class="section-inner">
+        <p class="section-sub">Love Song</p>
+        <h3 class="section-title">Give Me Your Forever</h3>
+        <p style="text-align:center;">เพลงจะเล่นอัตโนมัติด้านหลัง หากไม่ดังให้แตะหน้าจอหนึ่งครั้ง</p>
       </div>
     </section>
 
@@ -303,8 +359,8 @@
             <a class="btn" href="https://maps.app.goo.gl/1NCrnEcLxnFLv1Bs9?g_st=ipc" target="_blank" rel="noopener">เปิดแผนที่</a>
           </div>
         </div>
-        <div class="card media" style="padding-top:65%;">
-          <iframe title="Location Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.698206255329!2d100.5362036!3d13.6798646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2a15a3475f857%3A0x88c124a3edee40f2!2z4Lij4Li04Lip4Lix4LiVIOC4q-C4oeC4qOC4leC4reC4meC4meC4l-C5gOC4mSBDYW5scml2ZXIgQ2x1YiAtIEtob24gS2FlbyBDbHVi!5e0!3m2!1sen!2sth!4v1700000000000!5m2!1sen!2sth" allowfullscreen loading="lazy"></iframe>
+        <div class="image-card">
+          <img src="./rimtara.png" alt="Rimtara Rama 3 location">
         </div>
       </div>
     </section>
@@ -335,8 +391,17 @@
           <h3 class="section-title">Send online gift to us</h3>
           <p>หากไม่สะดวกมาร่วมงาน สามารถส่งความรักและของขวัญออนไลน์ถึงเราได้</p>
         </div>
-        <div class="card media" style="padding-top:50%; background:#fff;">
-          <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1000&q=80" alt="Gift box">
+        <div class="gift-card">
+          <div class="gift-row">
+            <div class="gift-qr">
+              <img src="./donate.jpeg" alt="Gift QR">
+            </div>
+            <div class="gift-text">
+              <span class="arrow">••••</span>
+              <span>Send online gift to us</span>
+              <span>🎁</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
