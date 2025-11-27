@@ -288,10 +288,11 @@
     }
     .invite-heading {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 3vw, 26px);
-      font-weight: 700;
+      font-size: clamp(18px, 2.6vw, 24px);
+      font-weight: 600;
       color: #2c1d10;
       margin: 0;
+      white-space: nowrap;
     }
     .invite-subtext {
       font-family: 'Playfair Display', serif;
@@ -435,16 +436,16 @@
       filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
     }
     .schedule-item:not(:first-child) .schedule-icon-main {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
     }
     .schedule-item:nth-child(2) .schedule-icon-main { /* sank */
-      width: 100px;
-      height: 100px;
+      width: 70px;
+      height: 70px;
     }
     .schedule-item:nth-child(3) .schedule-icon-main { /* you_and_me */
-      width: 100px;
-      height: 100px;
+      width: 50px;
+      height: 50px;
     }
     .schedule-item:nth-child(4) .schedule-icon-main { /* eat */
       width: 70px;
@@ -473,15 +474,78 @@
     .schedule-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(20px, 3vw, 24px);
-      letter-spacing: 0.04em;
-      font-weight: 700;
+      letter-spacing: 0.03em;
+      font-weight: 500;
       line-height: 1.25;
     }
     .schedule-time {
       font-family: 'Playfair Display', serif;
       font-size: clamp(18px, 2.6vw, 22px);
       letter-spacing: 0.08em;
-      opacity: 0.95;
+      opacity: 0.9;
+    }
+    .dress-card {
+      margin-top: clamp(24px, 4vw, 36px);
+      background: #f7f1ea;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(12px, 3vw, 22px);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(16px, 2.6vw, 26px);
+      align-items: center;
+    }
+    .dress-img-wrap {
+      background: #f7f1ea;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      width: 100%;
+      max-width: 340px;
+      justify-self: center;
+    }
+    .dress-img {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.16);
+      background: #ddd;
+    }
+    .dress-info {
+      text-align: center;
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+      color: #2c1d10;
+    }
+    .dress-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4.5vw, 39px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .dress-swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 56px);
+      gap: 0;
+      height: 196px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+    }
+    .dress-swatches span {
+      width: 100%;
+      height: 100%;
+    }
+    .dress-note {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+      max-width: 320px;
     }
     .schedule-list {
       margin-top: clamp(32px, 5vw, 52px);
@@ -599,6 +663,21 @@
       gap: 12px;
       align-items: center;
       justify-content: center;
+    }
+    #gift .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: clamp(24px, 4vw, 28px);
+      letter-spacing: 0.06em;
+      text-transform: none;
+    }
+    .gift-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      color: #4a3a2c;
     }
     .gift-row {
       display: grid;
@@ -731,7 +810,7 @@
         <div class="invite-line"></div>
         <h3 class="invite-heading">Mr.Supamit Kamkloy and Mrs. Boonsong Kamseng</h3>
         <p class="invite-subtext">
-          With great joy, we invite you to honor us with your presence and join us for a celebratory meal of the wedding of
+          With great joy, we invite you to honor ous with your presence and join us for a celebratory meal of the wedding of
         </p>
         <div class="invite-couple">
           <span>Ms.Kamonwan Kamkloy (May)</span>
@@ -816,11 +895,35 @@
       </div>
     </section>
 
+    <section id="dresscode">
+      <div class="dress-card">
+        <div class="dress-img-wrap">
+          <img class="dress-img" src="./mock.jpg" alt="Dress code sample">
+        </div>
+        <div class="dress-info">
+          <h3 class="dress-title">Dress code</h3>
+          <div class="dress-swatches" aria-hidden="true">
+            <span style="background:#d28b62;"></span>
+            <span style="background:#a75c19;"></span>
+            <span style="background:#8a3b05;"></span>
+            <span style="background:#652107;"></span>
+            <span style="background:#5c0010;"></span>
+          </div>
+          <div class="dress-note">Cream, Brown &amp; Red (Bergandy)</div>
+        </div>
+      </div>
+    </section>
+
     <section id="rsvp">
       <div class="section-inner grid-two">
         <div>
-          <p class="section-sub">RSVP</p>
           <h3 class="section-title">Register Here!</h3>
+          <p class="section-sub">
+            <a href="https://forms.gle/NsVRhyTcu2yGShRw7" target="_blank" rel="noopener">
+              <img src="./icons/rsvp.png" alt="RSVP" style="height:160px; object-fit:contain; vertical-align:middle;">
+            </a>
+          </p>
+          
           <p>เพื่อให้เราเตรียมงานได้ครบถ้วน รบกวนตอบแบบฟอร์มยืนยันการเข้าร่วม</p>
           <div class="cta-row" style="justify-content:flex-start;">
             <a class="btn" href="https://forms.gle/NsVRhyTcu2yGShRw7" target="_blank" rel="noopener">กดที่นี่</a>
@@ -838,9 +941,13 @@
     <section class="maroon" id="gift">
       <div class="section-inner grid-two">
         <div>
-          <p class="section-sub">ของขวัญ</p>
           <h3 class="section-title">Send online gift to us</h3>
-          <p>หากไม่สะดวกมาร่วมงาน สามารถส่งความรักและของขวัญออนไลน์ถึงเราได้</p>
+          <div style="margin-top:12px; text-align:center;">
+            <img src="./icons/payme.jpeg" alt="Pay me" style="max-width:240px; width:100%; border-radius:8px; box-shadow:0 10px 24px rgba(0,0,0,0.18); display:inline-block;">
+          </div>
+          <div class="cta-row" style="justify-content:center;">
+            <a class="btn" href="scbeasy://payment/transfer?promptpay=0652294615" aria-label="Open SCB Easy with PromptPay">SCB Easy</a>
+          </div>
         </div>
         <div class="gift-card">
           <div class="gift-row">
