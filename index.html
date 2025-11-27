@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>May & Spy Wedding</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     :root {
       --mock: url('./mock.jpg');
@@ -29,6 +29,17 @@
       max-width: 1200px;
       margin: 0 auto 80px;
       padding: clamp(18px, 3vw, 32px);
+      position: relative;
+      z-index: 1;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.76)), url('./materials/aurora.jpg') center 0% / cover no-repeat;
+      opacity: 0.85;
+      z-index: 0;
+      pointer-events: none;
     }
     header.hero {
       position: relative;
@@ -232,6 +243,85 @@
       border-radius: 8px;
       padding: 4px;
     }
+    /* Invitation block (sample layout) */
+    .invite-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.82)), url('./materials/bg.jpg') center/cover no-repeat;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 4vw, 40px);
+      display: grid;
+      gap: clamp(14px, 3vw, 22px);
+      text-align: center;
+      color: #2c1d10;
+    }
+    .invite-photos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      align-items: center;
+      justify-items: center;
+    }
+    .invite-photos img {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.12);
+      background: #ddd;
+    }
+    .invite-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #7a2f00, transparent);
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .invite-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3vw, 26px);
+      font-weight: 700;
+      color: #2c1d10;
+      margin: 0;
+    }
+    .invite-subtext {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 2.6vw, 22px);
+      line-height: 1.6;
+      color: #2c1d10;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .invite-couple {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3.6vw, 30px);
+      font-weight: 700;
+      color: #8a3b05;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 0 auto;
+    }
+    .invite-couple img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    .invite-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: -2px;
+    }
+    .invite-footer img {
+      height: clamp(68px, 10vw, 88px);
+      object-fit: contain;
+      margin-top: 8px;
+    }
     .time {
       font-weight: 700;
       color: var(--accent);
@@ -303,41 +393,106 @@
       text-align: center;
     }
     .schedule-item {
-      position: relative;
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 12px;
+      gap: 24px;
       align-items: center;
-      padding-left: 4px;
+      justify-items: center;
     }
-    .schedule-item:not(:last-child)::before {
-      content: "";
-      position: absolute;
-      left: 14px;
-      top: 42px;
-      bottom: -6px;
-      width: 2px;
-      background: rgba(255,250,244,0.4);
-      opacity: 0.8;
+    .schedule-stack {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
     }
-    .schedule-icon {
-      width: 50px;
-      height: 50px;
+    .schedule-icon-wrap {
+      position: relative;
+      width: 140px;
+      height: 130px;
+      display: grid;
+      place-items: center;
+    }
+    .schedule-icon-main {
+      width: 120px;
+      height: 120px;
       object-fit: contain;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+    .schedule-item:not(:first-child) .schedule-icon-main {
+      width: 100px;
+      height: 100px;
+    }
+    .schedule-item:nth-child(2) .schedule-icon-main { /* sank */
+      width: 100px;
+      height: 100px;
+    }
+    .schedule-item:nth-child(3) .schedule-icon-main { /* you_and_me */
+      width: 100px;
+      height: 100px;
+    }
+    .schedule-item:nth-child(4) .schedule-icon-main { /* eat */
+      width: 70px;
+      height: 70px;
+    }
+    .schedule-icon-extra {
+      position: absolute;
+      right: -14px;
+      top: -6px;
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.25));
+    }
+    .schedule-divider {
+      width: 2px;
+      height: 42px;
+      background: rgba(255,250,244,0.9);
+      border-radius: 2px;
     }
     .schedule-body {
       display: grid;
-      gap: 4px;
+      gap: 10px;
+      text-align: center;
     }
     .schedule-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3vw, 24px);
+      letter-spacing: 0.04em;
       font-weight: 700;
-      letter-spacing: 0.05em;
+      line-height: 1.25;
     }
     .schedule-time {
-      font-size: 14px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 2.6vw, 22px);
       letter-spacing: 0.08em;
-      opacity: 0.9;
+      opacity: 0.95;
+    }
+    .schedule-list {
+      margin-top: clamp(32px, 5vw, 52px);
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      gap: 12px;
+    }
+    .schedule-item-card {
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #f8f4f2;
+      border: 1px solid rgba(122,47,0,0.08);
+    }
+    .schedule-item-card .time {
+      font-weight: 800;
+      color: #b25b1f;
+      letter-spacing: 0.1em;
+    }
+    .schedule-item-card .desc {
+      color: #2c2c2c;
+      font-weight: 600;
     }
     .pill {
       display: inline-flex;
@@ -550,36 +705,28 @@
     </section> -->
 
     <section id="invite">
-      <div class="section-inner">
-        <p class="section-sub">We joyfully invite you</p>
-        <h3 class="section-title">Ms. Kamonwan (May) &amp; Mr. Thanatthuch (Spy)</h3>
-        <p style="text-align:center; max-width:720px; margin: 0 auto 18px;">
-          With great joy, we invite you to honor us with your presence and join us for a celebratory meal of our wedding.
+      <div class="section-inner invite-card">
+        <div class="invite-photos">
+          <img src="./mock.jpg" alt="Couple mock 1">
+          <img src="./mock.jpg" alt="Couple mock 2">
+          <img src="./mock.jpg" alt="Couple mock 3">
+        </div>
+        <div class="invite-line"></div>
+        <h3 class="invite-heading">Mr.Supamit Kamkloy and Mrs. Boonsong Kamseng</h3>
+        <p class="invite-subtext">
+          With great joy, we invite you to honor us with your presence and join us for a celebratory meal of the wedding of
         </p>
-        <div class="timeline">
-          <div class="timeline-item">
-            <img class="icon" src="./ring_icon.png" alt="">
-            <div class="time">09:09</div>
-            <div class="desc">ขบวนขันหมาก & Engagement Ceremony</div>
-          </div>
-          <div class="timeline-item">
-            <img class="icon" src="./ring_icon.png" alt="">
-            <div class="time">10:29</div>
-            <div class="desc">Water Blessing Ceremony</div>
-          </div>
-          <div class="timeline-item">
-            <img class="icon" src="./ring_icon.png" alt="">
-            <div class="time">11:09</div>
-            <div class="desc">Finished Morning Ceremony</div>
-          </div>
-          <div class="timeline-item">
-            <img class="icon" src="./ring_icon.png" alt="">
-            <div class="time">11:30</div>
-            <div class="desc">Wedding Reception</div>
-          </div>
+        <div class="invite-couple">
+          <span>Ms.Kamonwan Kamkloy (May)</span>
+          <img src="./icons/ring1.png" alt="Rings icon">
+          <span>Mr.Thanatthuch Kamseng (Spy)</span>
+        </div>
+        <div class="invite-footer">
+          <img src="./icons/wedding_day.png" alt="Wedding day graphic">
         </div>
       </div>
     </section>
+
 
     <section class="maroon" id="location">
       <div class="section-inner">
@@ -597,28 +744,48 @@
           <div class="schedule">
             <h4>Wedding Schedule</h4>
             <div class="schedule-item">
-              <img class="schedule-icon" src="./icons/khanmak.png" alt="">
+              <div class="schedule-stack">
+                <div class="schedule-icon-wrap">
+                  <img class="schedule-icon-main" src="./icons/khanmak_ring.png" alt="">
+                  <!-- <img class="schedule-icon-extra" src="./icons/duo_ring.png" alt=""> -->
+                </div>
+                <div class="schedule-divider"></div>
+              </div>
               <div class="schedule-body">
                 <div class="schedule-title">Khan Mak , Engagement Ceremony</div>
                 <div class="schedule-time">09.09</div>
               </div>
             </div>
             <div class="schedule-item">
-              <img class="schedule-icon" src="./ring_icon.png" alt="">
+              <div class="schedule-stack">
+                <div class="schedule-icon-wrap">
+                  <img class="schedule-icon-main" src="./icons/sank.png" alt="">
+                </div>
+                <div class="schedule-divider"></div>
+              </div>
               <div class="schedule-body">
                 <div class="schedule-title">Water Blessing Ceremony</div>
                 <div class="schedule-time">10.29</div>
               </div>
             </div>
             <div class="schedule-item">
-              <img class="schedule-icon" src="./ring_icon.png" alt="">
+              <div class="schedule-stack">
+                <div class="schedule-icon-wrap">
+                  <img class="schedule-icon-main" src="./icons/you_and_me.png" alt="">
+                </div>
+                <div class="schedule-divider"></div>
+              </div>
               <div class="schedule-body">
                 <div class="schedule-title">Finished Morning Ceremony</div>
                 <div class="schedule-time">11.09</div>
               </div>
             </div>
             <div class="schedule-item">
-              <img class="schedule-icon" src="./ring_icon.png" alt="">
+              <div class="schedule-stack">
+                <div class="schedule-icon-wrap">
+                  <img class="schedule-icon-main" src="./icons/eat.png" alt="">
+                </div>
+              </div>
               <div class="schedule-body">
                 <div class="schedule-title">Wedding Reception</div>
                 <div class="schedule-time">11.30</div>
