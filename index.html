@@ -288,7 +288,7 @@
     }
     .invite-heading {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(18px, 2.6vw, 24px);
+      font-size: clamp(18px, 2.4vw, 24px);
       font-weight: 600;
       color: #2c1d10;
       margin: 0;
@@ -304,19 +304,19 @@
     }
     .invite-couple {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 3.6vw, 30px);
-      font-weight: 700;
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 600;
       color: #8a3b05;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 10px;
+      flex-wrap: nowrap;
       margin: 0 auto;
     }
     .invite-couple img {
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       object-fit: contain;
     }
     .invite-footer {
@@ -331,6 +331,22 @@
       height: clamp(68px, 10vw, 88px);
       object-fit: contain;
       margin-top: 8px;
+    }
+    @media (max-width: 640px) {
+      .invite-heading {
+        font-size: 16px;
+        letter-spacing: 0.06em;
+        white-space: normal;
+      }
+      .invite-couple {
+        font-size: 16px;
+        gap: 6px;
+      }
+      .invite-couple span { white-space: nowrap; }
+      .invite-couple img {
+        width: 26px;
+        height: 26px;
+      }
     }
     .time {
       font-weight: 700;
@@ -770,10 +786,6 @@
           <a class="calendar-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=May%20%26%20Spy%20Wedding&dates=20261121T020000Z/20261121T050000Z&details=Join%20us%20for%20May%20%26%20Spy%20Wedding&location=Rimt%20Tara%20Rama%203%20(Hong%20Rimna%20Ti)" target="_blank" rel="noopener">Add to Google Calendar</a>
         </div>
         <!-- <p>กดปุ่มเพื่อฟังเพลงและเลื่อนชมการ์ดของเรา</p> -->
-        <div class="cta-row">
-          <!-- <a class="btn" href="#video">ฟังเพลง</a> -->
-          <a class="btn" href="#invite">ชมการ์ด</a>
-        </div>
       </div>
     </header>
 
@@ -946,8 +958,8 @@
             <img src="./icons/payme.jpeg" alt="Pay me" style="max-width:240px; width:100%; border-radius:8px; box-shadow:0 10px 24px rgba(0,0,0,0.18); display:inline-block;">
           </div>
           <div class="cta-row" style="justify-content:center;">
-            <a class="btn" href="scbeasy://qrpayment/?pp=0652294615" aria-label="Open SCB Easy with PromptPay">SCB Easy</a>
-            <a class="btn" href="kplus://payment/transfer?promptpay=0652294615" aria-label="Open K PLUS with PromptPay">K PLUS</a>
+            <!-- <a class="btn" href="scbeasy://qrpayment/?pp=0652294615" aria-label="Open SCB Easy with PromptPay">SCB Easy</a>
+            <a class="btn" href="kplus://payment/transfer?promptpay=0652294615" aria-label="Open K PLUS with PromptPay">K PLUS</a> -->
           </div>
         </div>
         <div class="gift-card">
@@ -983,7 +995,7 @@
     <section class="maroon" id="social">
       <div class="section-inner">
         <p class="section-sub">See you</p>
-        <h3 class="section-title">#MaySpyWedding</h3>
+        <h3 class="section-title"><img src="./icons/hashtag.png" alt="#" style="height:96px; vertical-align:middle; margin-right:12px;">#MaySpyWedding</h3>
         <p style="text-align:center; margin: 10px 0 18px;">Our apologies if we are unable to greet you in person</p>
         <div class="cta-row">
           <a class="btn" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
