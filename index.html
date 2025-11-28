@@ -81,6 +81,8 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       font-size: clamp(12px, 1vw, 14px);
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: "lnum", "tnum";
       color: rgba(255,250,244,0.8);
     }
     h1 {
@@ -150,6 +152,8 @@
       font-size: clamp(30px, 6vw, 42px);
       font-weight: 400;
       letter-spacing: 0.08em;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
       line-height: 1.05;
     }
     .cd-label {
@@ -410,6 +414,7 @@
       display: block;
     }
     .loc-text {
+      font-family: 'Cormorant Garamond', serif;
       color: var(--cream);
       font-weight: 600;
       letter-spacing: 0.04em;
@@ -799,7 +804,7 @@
           </div>
         </div>
         <div class="calendar-row">
-          <a class="calendar-btn" href="./may-spy-wedding.ics">Add to Calendar (ICS)</a>
+          <a class="calendar-btn" href="./may-spy-wedding.ics">Add to Calendar</a>
           <a class="calendar-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=May%20%26%20Spy%20Wedding&dates=20261121T013000Z/20261121T070000Z&details=Join%20us%20for%20May%20%26%20Spy%20Wedding&location=Rimt%20Tara%20Rama%203%20(Hong%20Rimna%20Ti)" target="_blank" rel="noopener">Add to Google Calendar</a>
         </div>
         <!-- <p>กดปุ่มเพื่อฟังเพลงและเลื่อนชมการ์ดของเรา</p> -->
