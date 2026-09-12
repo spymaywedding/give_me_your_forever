@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>May & Spy Wedding</title>
+  <link rel="icon" href="./favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/favicon/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/favicon/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&family=Great+Vibes&family=Allura&display=swap" rel="stylesheet">
   <meta property="og:title" content="May &amp; Spy Wedding">
   <meta property="og:description" content="Join us to celebrate the wedding of May &amp; Spy · 21 Nov 2026">
@@ -1206,6 +1211,24 @@
       display: block;
       margin-top: -6px;
     }
+    .social-hashtag-title {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      max-width: 100%;
+      font-size: clamp(18px, 4.2vw, 30px);
+      letter-spacing: 0.02em;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .social-hashtag-title .social-hashtag-btn {
+      margin-right: 0;
+    }
+    .social-hashtag-title::after {
+      flex-basis: 100%;
+    }
     .social-note {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -1234,6 +1257,7 @@
       .media { padding-top: 65%; }
       .hero-bg { background-position: 48% center; }
       .moments-slider { padding-top: 72%; }
+      .social-hashtag-title { flex-direction: column; }
     }
 
     /* Scroll-reveal */
@@ -1682,7 +1706,7 @@
             <span data-hex="#F5E8D0" data-name="Ivory" style="background:#F5E8D0;"></span>
             <span data-hex="#C9A15C" data-name="Camel" style="background:#C9A15C;"></span>
             <span data-hex="#7A4A24" data-name="Chocolate Brown" style="background:#7A4A24;"></span>
-            <span data-hex="#800020" data-name="Burgundy" style="background:#800020;"></span>
+            <span data-hex="#680019" data-name="Burgundy" style="background:#680019;"></span>
           </div>
           <div class="dress-note">Cream, Brown &amp; Red (Burgundy)</div>
         </div>
@@ -1794,10 +1818,10 @@
           </svg>
         </div>
         <p class="section-sub">See you</p>
-        <h3 class="section-title">
+        <h3 class="section-title social-hashtag-title">
           <button type="button" class="social-hashtag-btn" id="share-fb-btn" aria-label="Post to Facebook">
             <img src="./icons/hashtag.png" alt="#" class="social-hashtag-icon">
-          </button>#mayandspywedding</h3>
+          </button><span>#mayandspywedding</span></h3>
         <p class="social-note">Our apologies if we are unable to greet you in person</p>
       </div>
     </section>
