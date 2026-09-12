@@ -158,6 +158,28 @@ window.addEventListener("load", () => {
   window.addEventListener("pointerdown", resumeOnGesture, { once: true });
   window.addEventListener("touchstart", resumeOnGesture, { once: true });
 
+  // Mobile browsers pause background audio when the tab/app loses focus.
+  // Resume it automatically the moment the guest comes back so the music
+  // doesn't just stay off and make them think the site is broken.
+  let wasPlayingBeforeHide = false;
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      wasPlayingBeforeHide = !audio.paused;
+    } else if (wasPlayingBeforeHide) {
+      audio.play().catch(() => {});
+    }
+  });
+
+  // Media Session metadata so mobile OS lock-screen/notification controls
+  // can show the song and let guests resume with one tap instead of
+  // reopening the tab.
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: "Give Me Your Forever",
+      artist: "May & Spy Wedding",
+    });
+  }
+
   // Countdown to 21 Nov 2026 (00:00 local time)
   const countdown = document.getElementById("hero-countdown");
   if (countdown) {
