@@ -36,27 +36,58 @@ window.addEventListener("load", () => {
     }
   }
 
-  // Dress code swatches: tap a color for a floating popup with its hex code
-  // and a large chip to hold up next to fabric when guests are shopping
+  // Dress code swatches: tap a color for a near-fullscreen panel with its hex
+  // code, big enough to hold the phone up next to fabric when shopping
   const swatches = document.querySelectorAll("#dress-swatches span");
   const colorPopup = document.getElementById("color-popup");
   const colorPopupChip = document.getElementById("color-popup-chip");
   const colorPopupText = document.getElementById("color-popup-text");
+  const colorPopupClose = document.getElementById("color-popup-close");
   if (swatches.length && colorPopup && colorPopupChip && colorPopupText) {
-    let hideTimer = null;
-    swatches.forEach((sw) => {
+    const swatchList = Array.from(swatches);
+    let activeIndex = 0;
+
+    const closePopup = () => colorPopup.classList.remove("visible");
+
+    const showColor = (index) => {
+      activeIndex = (index + swatchList.length) % swatchList.length;
+      const sw = swatchList[activeIndex];
+      swatchList.forEach((s) => s.classList.remove("active"));
+      sw.classList.add("active");
+      colorPopupChip.style.background = sw.dataset.hex;
+      colorPopupText.textContent = `${sw.dataset.name} · ${sw.dataset.hex}`;
+    };
+
+    swatchList.forEach((sw, i) => {
       sw.addEventListener("click", () => {
-        swatches.forEach((s) => s.classList.remove("active"));
-        sw.classList.add("active");
-        const hex = sw.dataset.hex;
-        const name = sw.dataset.name;
-        colorPopupChip.style.background = hex;
-        colorPopupText.textContent = `${name} · ${hex}`;
+        showColor(i);
         colorPopup.classList.add("visible");
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(() => colorPopup.classList.remove("visible"), 4000);
       });
     });
+
+    if (colorPopupClose) colorPopupClose.addEventListener("click", closePopup);
+    colorPopup.addEventListener("click", (e) => {
+      if (e.target === colorPopup) closePopup();
+    });
+
+    // Swipe (or drag) left/right on the open panel to browse other colors
+    let dragStartX = null;
+    const onSwipeEnd = (endX) => {
+      if (dragStartX === null) return;
+      const delta = endX - dragStartX;
+      const SWIPE_THRESHOLD = 40;
+      if (delta > SWIPE_THRESHOLD) showColor(activeIndex - 1);
+      else if (delta < -SWIPE_THRESHOLD) showColor(activeIndex + 1);
+      dragStartX = null;
+    };
+    colorPopup.addEventListener("touchstart", (e) => {
+      dragStartX = e.touches[0].clientX;
+    }, { passive: true });
+    colorPopup.addEventListener("touchend", (e) => onSwipeEnd(e.changedTouches[0].clientX));
+    colorPopup.addEventListener("mousedown", (e) => {
+      dragStartX = e.clientX;
+    });
+    colorPopup.addEventListener("mouseup", (e) => onSwipeEnd(e.clientX));
   }
 
   // Back-to-top button
@@ -358,11 +389,25 @@ window.addEventListener("load", () => {
     });
   }
 
-  // Hashtag icon: open Facebook's post composer prefilled with #MaySpyWedding
+  // Hashtag icon: Facebook ignores pre-filled post text from external links
+  // (anti-spam), so copy the hashtag to the clipboard and let the guest
+  // paste it once Facebook's composer opens.
   const shareFbBtn = document.getElementById("share-fb-btn");
+  const copyToast = document.getElementById("copy-toast");
   if (shareFbBtn) {
-    shareFbBtn.addEventListener("click", () => {
-      const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent("#MaySpyWedding")}`;
+    shareFbBtn.addEventListener("click", async () => {
+      const hashtag = "#mayandspywedding";
+      try {
+        await navigator.clipboard.writeText(hashtag);
+        if (copyToast) {
+          copyToast.textContent = "คัดลอก #mayandspywedding แล้ว — วางตอนโพสต์ได้เลย";
+          copyToast.classList.add("visible");
+          setTimeout(() => copyToast.classList.remove("visible"), 3000);
+        }
+      } catch (err) {
+        window.prompt("คัดลอกแฮชแท็กนี้แล้ววางตอนโพสต์:", hashtag);
+      }
+      const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(hashtag)}`;
       window.open(url, "_blank", "noopener,width=600,height=600");
     });
   }

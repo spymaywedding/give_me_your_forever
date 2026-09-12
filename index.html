@@ -6,14 +6,16 @@
   <title>May & Spy Wedding</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&family=Great+Vibes&family=Allura&display=swap" rel="stylesheet">
   <meta property="og:title" content="May &amp; Spy Wedding">
-  <meta property="og:description" content="Join us to celebrate the wedding of May &amp; Spy">
+  <meta property="og:description" content="Join us to celebrate the wedding of May &amp; Spy · 21 Nov 2026">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="./preview/preview.avif">
-  <meta property="og:image:type" content="image/avif">
+  <meta property="og:image" content="./preview/preview.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="1200">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="May &amp; Spy Wedding">
-  <meta name="twitter:description" content="Join us to celebrate the wedding of May &amp; Spy">
-  <meta name="twitter:image" content="./preview/preview.avif">
+  <meta name="twitter:description" content="Join us to celebrate the wedding of May &amp; Spy · 21 Nov 2026">
+  <meta name="twitter:image" content="./preview/preview.jpg">
   <style>
     :root {
       --mock: url('./materials/countdown-cafe.jpeg');
@@ -708,42 +710,67 @@
     }
     .color-popup {
       position: fixed;
-      left: 50%;
-      bottom: 24px;
+      inset: 0;
       z-index: 500;
       display: flex;
       align-items: center;
-      gap: 14px;
-      background: #fffaf4;
-      border: 1px solid rgba(202,162,94,0.5);
-      border-radius: 16px;
-      padding: 12px 20px 12px 12px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.28);
+      justify-content: center;
+      background: rgba(0,0,0,0.6);
       opacity: 0;
-      transform: translate(-50%, 16px);
       pointer-events: none;
-      transition: opacity 250ms ease, transform 250ms ease;
+      transition: opacity 250ms ease;
     }
     .color-popup.visible {
       opacity: 1;
-      transform: translate(-50%, 0);
       pointer-events: auto;
     }
+    .color-popup-inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      transform: scale(0.9);
+      transition: transform 250ms ease;
+    }
+    .color-popup.visible .color-popup-inner {
+      transform: scale(1);
+    }
     .color-popup-chip {
-      width: 64px;
-      height: 64px;
-      border-radius: 12px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-      border: 1px solid rgba(0,0,0,0.08);
-      flex-shrink: 0;
+      width: min(88vw, 480px);
+      height: min(62vh, 480px);
+      border-radius: 28px;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+    }
+    .color-popup-close {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.95);
+      color: #3a2b1c;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
     }
     .color-popup-text {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 17px;
+      font-size: 19px;
       letter-spacing: 0.03em;
       color: var(--muted);
-      text-align: left;
+      text-align: center;
+      background: rgba(255,250,244,0.95);
+      padding: 10px 24px;
+      border-radius: 999px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.22);
       white-space: nowrap;
     }
     .dress-note {
@@ -1347,6 +1374,35 @@
     }
     .back-to-top svg { width: 20px; height: 20px; }
 
+    .copy-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 600;
+      transform: translate(-50%, 16px);
+      background: #fffaf4;
+      border: 1px solid rgba(202,162,94,0.5);
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--muted);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 250ms ease, transform 250ms ease;
+      max-width: 90vw;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .copy-toast.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
     /* Cursor gold sparkle trail (fine-pointer devices only) */
     .cursor-spark {
       position: fixed;
@@ -1393,9 +1449,13 @@
       <path d="M12 19V5M12 5L5 12M12 5l7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
+  <div class="copy-toast" id="copy-toast"></div>
   <div class="color-popup" id="color-popup">
-    <span class="color-popup-chip" id="color-popup-chip"></span>
-    <span class="color-popup-text" id="color-popup-text"></span>
+    <div class="color-popup-inner">
+      <button type="button" class="color-popup-close" id="color-popup-close" aria-label="ปิด">&times;</button>
+      <div class="color-popup-chip" id="color-popup-chip"></div>
+      <span class="color-popup-text" id="color-popup-text"></span>
+    </div>
   </div>
   <div class="page">
     <!-- Background music -->
@@ -1646,11 +1706,7 @@
               <img src="./icons/payme.jpeg" alt="Pay me" style="max-width:240px; width:100%; border-radius:8px; border:3px solid var(--gold); box-shadow:0 10px 24px rgba(0,0,0,0.18); display:inline-block;">
             </a>
           </div>
-          <p class="gift-note">หรือกดเปิดแอปธนาคารเพื่อโอนผ่าน PromptPay โดยตรง</p>
-          <div class="cta-row" style="justify-content:center;">
-            <a class="btn" href="scbeasy://qrpayment/?pp=0652294615" aria-label="Open SCB Easy with PromptPay">SCB Easy</a>
-            <a class="btn" href="kplus://payment/transfer?promptpay=0652294615" aria-label="Open K PLUS with PromptPay">K PLUS</a>
-          </div>
+          <p class="gift-note">สแกน QR ด้านบนด้วยแอปธนาคารใดก็ได้ที่รองรับ PromptPay</p>
         </div>
         <!-- <div class="gift-card">
           <div class="gift-row">
@@ -1696,7 +1752,7 @@
         <h3 class="section-title">
           <button type="button" class="social-hashtag-btn" id="share-fb-btn" aria-label="Post to Facebook">
             <img src="./icons/hashtag.png" alt="#" class="social-hashtag-icon">
-          </button>#MaySpyWedding</h3>
+          </button>#mayandspywedding</h3>
         <p class="social-note">Our apologies if we are unable to greet you in person</p>
       </div>
     </section>
