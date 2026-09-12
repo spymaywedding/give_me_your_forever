@@ -1258,6 +1258,8 @@
       .hero-bg { background-position: 48% center; }
       .moments-slider { padding-top: 72%; }
       .social-hashtag-title { flex-direction: column; }
+      /* backdrop-filter is costly to recomposite on scroll on phones */
+      .btn, .calendar-btn { backdrop-filter: none; }
     }
 
     /* Scroll-reveal */
@@ -1822,7 +1824,7 @@
           <button type="button" class="social-hashtag-btn" id="share-fb-btn" aria-label="Post to Facebook">
             <img src="./icons/hashtag.png" alt="#" class="social-hashtag-icon">
           </button><span>#mayandspywedding</span></h3>
-        <p class="social-note">Our apologies if we are unable to greet you in person</p>
+        <p class="social-note">We sincerely apologize if we are unable to greet you in person</p>
       </div>
     </section>
 

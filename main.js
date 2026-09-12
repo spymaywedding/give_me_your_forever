@@ -314,6 +314,8 @@ window.addEventListener("load", () => {
   }
 
   // Drifting gold sparkles behind key sections (D3) — hero, RSVP, location, gift, social
+  // Each host's per-frame animation only runs while it's actually on screen,
+  // so off-screen sections don't compete with scrolling for the main thread.
   const initGoldParticles = (host) => {
     const width = host.clientWidth || 800;
     const height = host.clientHeight || 600;
@@ -326,7 +328,7 @@ window.addEventListener("load", () => {
       .attr("viewBox", `0 0 ${width} ${height}`)
       .attr("preserveAspectRatio", "xMidYMid slice");
 
-    const PARTICLE_COUNT = window.innerWidth < 640 ? 20 : 36;
+    const PARTICLE_COUNT = window.innerWidth < 640 ? 12 : 22;
     const particles = d3.range(PARTICLE_COUNT).map(() => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -353,20 +355,37 @@ window.addEventListener("load", () => {
     };
     twinkle(dots);
 
-    d3.timer(() => {
-      dots
-        .attr("cy", (d) => {
-          d.y -= d.speed;
-          if (d.y < -8) d.y = height + 8;
-          return d.y;
-        })
-        .attr("cx", (d) => {
-          d.x += d.drift;
-          if (d.x < -8) d.x = width + 8;
-          if (d.x > width + 8) d.x = -8;
-          return d.x;
-        });
-    });
+    let timer = null;
+    const startTimer = () => {
+      if (timer) return;
+      timer = d3.timer(() => {
+        dots
+          .attr("cy", (d) => {
+            d.y -= d.speed;
+            if (d.y < -8) d.y = height + 8;
+            return d.y;
+          })
+          .attr("cx", (d) => {
+            d.x += d.drift;
+            if (d.x < -8) d.x = width + 8;
+            if (d.x > width + 8) d.x = -8;
+            return d.x;
+          });
+      });
+    };
+    const stopTimer = () => {
+      if (!timer) return;
+      timer.stop();
+      timer = null;
+    };
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((entry) => (entry.isIntersecting ? startTimer() : stopTimer()));
+      }, { rootMargin: "200px" }).observe(host);
+    } else {
+      startTimer();
+    }
   };
 
   if (typeof d3 !== "undefined") {
