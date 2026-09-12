@@ -389,21 +389,40 @@ window.addEventListener("load", () => {
     });
   }
 
+  // Shared toast for copy-to-clipboard confirmations
+  const copyToast = document.getElementById("copy-toast");
+  const showCopyToast = (message) => {
+    if (!copyToast) return;
+    copyToast.textContent = message;
+    copyToast.classList.add("visible");
+    clearTimeout(showCopyToast._timer);
+    showCopyToast._timer = setTimeout(() => copyToast.classList.remove("visible"), 3000);
+  };
+
+  // Gift account number: tap to copy for a manual bank transfer
+  const giftAccountBtn = document.getElementById("gift-account-copy");
+  if (giftAccountBtn) {
+    giftAccountBtn.addEventListener("click", async () => {
+      const account = giftAccountBtn.dataset.account;
+      try {
+        await navigator.clipboard.writeText(account);
+        showCopyToast("คัดลอกเลขบัญชีแล้ว — วางตอนโอนได้เลย");
+      } catch (err) {
+        window.prompt("คัดลอกเลขบัญชีนี้:", account);
+      }
+    });
+  }
+
   // Hashtag icon: Facebook ignores pre-filled post text from external links
   // (anti-spam), so copy the hashtag to the clipboard and let the guest
   // paste it once Facebook's composer opens.
   const shareFbBtn = document.getElementById("share-fb-btn");
-  const copyToast = document.getElementById("copy-toast");
   if (shareFbBtn) {
     shareFbBtn.addEventListener("click", async () => {
       const hashtag = "#mayandspywedding";
       try {
         await navigator.clipboard.writeText(hashtag);
-        if (copyToast) {
-          copyToast.textContent = "คัดลอก #mayandspywedding แล้ว — วางตอนโพสต์ได้เลย";
-          copyToast.classList.add("visible");
-          setTimeout(() => copyToast.classList.remove("visible"), 3000);
-        }
+        showCopyToast("คัดลอก #mayandspywedding แล้ว — วางตอนโพสต์ได้เลย");
       } catch (err) {
         window.prompt("คัดลอกแฮชแท็กนี้แล้ววางตอนโพสต์:", hashtag);
       }

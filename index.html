@@ -1111,6 +1111,45 @@
       text-align: center;
       margin: 14px 0 4px;
     }
+    .gift-account {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin: 16px 0 0;
+      text-align: center;
+    }
+    .gift-account-bank {
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: rgba(255,250,244,0.7);
+    }
+    .gift-account-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(202,162,94,0.6);
+      border-radius: 999px;
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: background 200ms ease, transform 150ms ease;
+    }
+    .gift-account-number:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+    }
+    .gift-account-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      color: rgba(255,250,244,0.75);
+    }
     .gift-row {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -1707,6 +1746,11 @@
             </a>
           </div>
           <p class="gift-note">สแกน QR ด้านบนด้วยแอปธนาคารใดก็ได้ที่รองรับ PromptPay</p>
+          <div class="gift-account">
+            <span class="gift-account-bank">ธนาคารกสิกรไทย</span>
+            <button type="button" class="gift-account-number" id="gift-account-copy" data-account="2253168598">225-3-16859-8</button>
+            <span class="gift-account-name">นายธนัชทัศน์ และ น.ส.กมลวรรณ</span>
+          </div>
         </div>
         <!-- <div class="gift-card">
           <div class="gift-row">
