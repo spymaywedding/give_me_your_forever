@@ -992,6 +992,23 @@
     .rsvp-card .section-title {
       margin-bottom: 6px;
     }
+    .btn-gold.btn-closed {
+      background: linear-gradient(120deg, #b9b3ad, #8c8580 55%, #b9b3ad);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+    .btn-gold.btn-closed:hover { transform: none; }
+    .btn-gold.btn-closed::after { display: none; }
+    .rsvp-full {
+      margin: 14px 0 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.6;
+      letter-spacing: 0.03em;
+      color: #a3122a;
+      text-align: center;
+    }
     .rsvp-icon-link {
       position: relative;
       display: inline-flex;
@@ -1807,7 +1824,7 @@
           </div>
           <p class="section-sub">You're Invited</p>
           <h3 class="section-title">Register Here!</h3>
-          <a class="rsvp-icon-link" href="https://forms.gle/NsVRhyTcu2yGShRw7" target="_blank" rel="noopener" aria-label="Register for the wedding">
+          <a class="rsvp-icon-link" aria-label="Registration is full">
             <span class="rsvp-crest">
               <span class="rsvp-crest-glow"></span>
               <svg class="rsvp-crest-ring" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1825,7 +1842,8 @@
           </a>
           <p class="rsvp-note">&nbsp;&nbsp;&nbsp;&nbsp;เพื่อให้เราได้จัดเตรียมการล่วงหน้าได้อย่างเหมาะสม<br>ขอรบกวนทุกท่านทำแบบตอบรับเข้าร่วมงานให้เราด้วยนะคะ/ครับ</p>
           <p class="rsvp-hope">HOPE TO SEE YOU AT OUR WEDDING</p>
-          <a class="btn-gold" href="https://forms.gle/NsVRhyTcu2yGShRw7" target="_blank" rel="noopener">กดที่นี่</a>
+          <span class="btn-gold btn-closed" aria-disabled="true">กดที่นี่</span>
+          <p class="rsvp-full">ขออภัย ขณะนี้ที่นั่งเต็มแล้ว<br>ขอบคุณสำหรับทุกความยินดีและคำอวยพรนะคะ/ครับ</p>
           <div class="ornament bottom">
             <svg viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 12 C 30 2, 45 22, 60 12 C 75 2, 90 22, 118 12" stroke="currentColor" stroke-width="1.4"/>
