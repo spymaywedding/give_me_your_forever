@@ -454,6 +454,90 @@ window.addEventListener("load", () => {
     });
   }
 
+  // Gift slip upload: shrink the photo in the browser, then post it to the
+  // Apps Script web app (apps-script/slip-upload.gs) which saves it to Drive.
+  // text/plain keeps it a "simple" request so there is no CORS preflight.
+  const SLIP_UPLOAD_URL = "https://script.google.com/macros/s/AKfycby6SL1GwC9-lBtBVLPGL3OwUx06hCRsSEDHPFQSw4He3bYBsYBQXaj0fYfPzv1MrDGCuQ/exec";
+  const slipForm = document.getElementById("slip-upload");
+  if (slipForm) {
+    const fileInput = document.getElementById("slip-file");
+    const fileLabel = document.getElementById("slip-file-label");
+    const nameInput = document.getElementById("slip-name");
+    const submitBtn = document.getElementById("slip-submit");
+    const status = document.getElementById("slip-status");
+
+    const shrinkImage = (file, maxSide = 1600, quality = 0.85) =>
+      new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+          const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+          URL.revokeObjectURL(url);
+          resolve(canvas.toDataURL("image/jpeg", quality).split(",")[1]);
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error("unreadable"));
+        };
+        img.src = url;
+      });
+
+    // Originals are shrunk before upload, so this only guards against files
+    // too big to decode comfortably on a phone (e.g. ProRAW / 48MP shots).
+    const MAX_ORIGINAL_MB = 10;
+    document.getElementById("slip-hint").textContent = `รองรับไฟล์รูปขนาดไม่เกิน ${MAX_ORIGINAL_MB}MB`;
+
+    const setStatus = (message, isError = false) => {
+      status.textContent = message;
+      status.classList.toggle("error", isError);
+    };
+
+    fileInput.addEventListener("change", () => {
+      let file = fileInput.files[0];
+      setStatus("");
+      if (file && file.size > MAX_ORIGINAL_MB * 1024 * 1024) {
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+        const message = `ไฟล์นี้ขนาด ${sizeMb}MB เกินกำหนด ${MAX_ORIGINAL_MB}MB ลองใช้ภาพแคปหน้าจอสลิปแทนนะคะ`;
+        setStatus(message, true);
+        showCopyToast(message);
+        fileInput.value = "";
+        file = null;
+      }
+      fileLabel.textContent = file ? file.name : "เลือกรูปสลิป";
+      submitBtn.disabled = !file;
+    });
+
+    slipForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      submitBtn.disabled = true;
+      setStatus("กำลังส่ง...");
+      try {
+        const data = await shrinkImage(file);
+        const res = await fetch(SLIP_UPLOAD_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ name: nameInput.value.trim(), mimeType: "image/jpeg", data }),
+        });
+        const result = await res.json();
+        if (!result.ok) throw new Error(result.error);
+
+        setStatus("ได้รับสลิปแล้ว ขอบคุณมากนะคะ 💛");
+        slipForm.reset();
+        fileLabel.textContent = "เลือกรูปสลิป";
+      } catch (err) {
+        setStatus("ส่งไม่สำเร็จ ลองใหม่อีกครั้งนะคะ", true);
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
   // Hashtag icon: Facebook ignores pre-filled post text from external links
   // (anti-spam), so copy the hashtag to the clipboard and let the guest
   // paste it once Facebook's composer opens.
